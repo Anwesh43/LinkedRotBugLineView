@@ -20,6 +20,7 @@ val strokeFactor : Int = 90
 val sizeFactor : Float = 2.9f
 val foreColor : Int = Color.parseColor("#4527A0")
 val backColor : Int = Color.parseColor("#212121")
+val delay : Long = 20
 
 fun Int.inverse() : Float = 1f / this
 fun Float.maxScale(i : Int, n : Int) : Float = Math.max(0f, this - i * n.inverse())
@@ -52,7 +53,7 @@ fun Canvas.drawRBLNode(i : Int, scale : Float, paint : Paint) {
         drawCircle(0f, 0f, r, paint)
         save()
         rotate(30f * sc1.divideScale(j, lines) * j.sf())
-        drawLine(0f, 0f, size, 0f, paint)
+        drawLine(0f, 0f, size * j.sf(), 0f, paint)
         restore()
         restore()
     }
@@ -104,7 +105,7 @@ class RotBugLineView(ctx : Context) : View(ctx) {
             if (animated) {
                 cb()
                 try {
-                    Thread.sleep(50)
+                    Thread.sleep(delay)
                     view.invalidate()
                 } catch(ex : Exception) {
 
