@@ -214,4 +214,12 @@ class RotBugLineView(ctx : Context) : View(ctx) {
             }
         }
     }
+
+    companion object {
+        fun create(activity: Activity) : RotBugLineView {
+            val view : RotBugLineView = RotBugLineView(activity)
+            activity.setContentView(view)
+            return view
+        }
+    }
 }
