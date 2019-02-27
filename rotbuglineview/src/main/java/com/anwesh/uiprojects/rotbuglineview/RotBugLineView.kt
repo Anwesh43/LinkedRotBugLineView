@@ -192,4 +192,25 @@ class RotBugLineView(ctx : Context) : View(ctx) {
             curr.startUpdating(cb)
         }
     }
+
+    data class Renderer(var view : RotBugLineView) {
+        private val rbl : RotBugLine = RotBugLine(0)
+        private val animator : Animator = Animator(view)
+
+        fun render(canvas : Canvas, paint : Paint) {
+            canvas.drawColor(backColor)
+            rbl.draw(canvas, paint)
+            animator.animate {
+                rbl.update {i, scl ->
+                    animator.stop()
+                }
+            }
+        }
+
+        fun handleTap() {
+            rbl.startUpdating {
+                animator.start()
+            }
+        }
+    }
 }
